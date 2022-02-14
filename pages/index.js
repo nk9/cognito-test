@@ -2,7 +2,19 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
-export default function Home() {
+import Amplify from 'aws-amplify';
+import { withAuthenticator } from '@aws-amplify/ui-react';
+
+Amplify.configure({
+    Auth: {
+        mandatorySignIn: true,
+        region: process.env.AWS_DEFAULT_REGION,
+        userPoolId: process.env.COGNITO_USER_POOL_ID,
+        userPoolWebClientId: process.env.COGNITO_CLIENT_ID,
+    }
+});
+
+export default withAuthenticator(function Home() {
   return (
     <div className={styles.container}>
       <Head>
@@ -66,4 +78,4 @@ export default function Home() {
       </footer>
     </div>
   )
-}
+})
