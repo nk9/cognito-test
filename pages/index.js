@@ -14,6 +14,8 @@ Amplify.configure({
     }
 });
 
+Amplify.Logger.LOG_LEVEL = 'DEBUG';
+
 export default withAuthenticator(function Home() {
   return (
     <div className={styles.container}>
